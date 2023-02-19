@@ -1,0 +1,10 @@
+.App {
+    margin: auto;
+    display: flex;
+    /* flex-direction: row; */
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background-color: white;
+    /* padding: 4rem; */
+}
