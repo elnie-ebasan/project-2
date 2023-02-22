@@ -10,6 +10,7 @@ const users = [
 export default function MensaheLogIn() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [loginStatus, setLoginStatus] = useState("");
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -23,11 +24,19 @@ export default function MensaheLogIn() {
     event.preventDefault();
     const user = users.find((user) => user.username === username && user.password === password);
     if (user) {
+      setLoginStatus("success");
       console.log("Logged in as:", user.username);
       setUsername("");
       setPassword("");
+      setTimeout(() => {
+        setLoginStatus("");
+      }, 2000);
     } else {
+      setLoginStatus("error");
       console.log("Incorrect username or password");
+      setTimeout(() => {
+        setLoginStatus("");
+      }, 2000);
     }
   };
 
@@ -38,6 +47,11 @@ export default function MensaheLogIn() {
 
   return (
     <div className="Mensahe-form">
+      {loginStatus && (
+        <div className={`login-message ${loginStatus}`}>
+          {loginStatus === "success" ? "Login successful!" : "Incorrect username or password."}
+        </div>
+      )}
       <form onSubmit={handleLogIn}>
         <input
           type="text"
