@@ -3,6 +3,18 @@ import MensaheHero from '../MensaheHero/MensaheHero'
 import MensaheLogIn from '../MensaheLogIn/MensaheLogIn'
 import './MensahePage.css'
 
+const userInfo = [
+  {
+      username: 'elnie.ebasan',
+      password: 'Abc123**'
+  },
+
+  {
+      username: 'el.yan',
+      password: 'Abcd1234**'
+  }
+]
+
 const Container = ({ children, spacing = 0 }) => (
   <div style={{ display: 'flex', flexDirection: 'row', gap: spacing }}>
     {children}
@@ -23,8 +35,9 @@ const MensahePage = () => (
       </Column>
 
       <Column>
-        <MensaheLogIn />
+       <MensaheLogIn userInfo={userInfo} />
       </Column>
+
     </Container>
     <br />
     <a href=""><h1>What's mensahe?</h1></a>

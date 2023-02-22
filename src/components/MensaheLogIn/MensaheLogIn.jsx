@@ -1,12 +1,15 @@
-import React, { useState} from 'react'
-import MensaheButtons from '../MensaheInput/MensaheButtons';
-import MensaheInput from '../MensaheInput/MensaheInput';
-import './MensaheLogIn.css'
-import logo from '../UI-images/mensahe-logo.jpg'
+import { useState } from "react";
+import MensaheButtons from "../MensaheButtons/MensaheButtons";
+import './MensaheLogIn.css';
 
-const MensaheLogIn = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+const users = [
+  { username: "elnie.ebasan", password: "Abc123**" },
+  { username: "el.yan", password: "Abcd1234**" },
+];
+
+export default function MensaheLogIn() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -16,60 +19,43 @@ const MensaheLogIn = () => {
     setPassword(event.target.value);
   };
 
-  const handleLogin = () => {
-    // Implement your login logic here
-    console.log('Logging in...');
-  };
-
-  const handleSignup = () => {
-    // Implement your signup logic here
-    console.log('Signing up...');
-  };
-
-  const handleForgotPassword = () => {
-    // Implement your forgot password logic here
-    console.log('Forgot password...');
-  };
-
-  const handleSubmit = (event) => {
+  const handleLogIn = (event) => {
     event.preventDefault();
-    console.log(`Email: ${username}`);
-    console.log(`Password: ${password}`);
+    const user = users.find((user) => user.username === username && user.password === password);
+    if (user) {
+      console.log("Logged in as:", user.username);
+      setUsername("");
+      setPassword("");
+    } else {
+      console.log("Incorrect username or password");
+    }
+  };
+
+  const handleSignup = (event) => {
+    event.preventDefault();
+    console.log('Register');
   };
 
   return (
-    <div className='Mensahe-form'>
-      {/* <p><img src={logo} alt="" className='logo'/>
-      ensahe</p> */}
-      
-      
-        <form onSubmit={handleSubmit}>
-        <MensaheInput
+    <div className="Mensahe-form">
+      <form onSubmit={handleLogIn}>
+        <input
           type="text"
           value={username}
           placeholder="Username"
           onChange={handleUsernameChange}
         />
-       
         <br />
         <br />
-        <MensaheInput
+        <input
           type="password"
           value={password}
           placeholder="Password"
           onChange={handlePasswordChange}
         />
         <br />
-        <br />
-        <MensaheButtons
-          onLogin={handleLogin}
-          onSignup={handleSignup}
-          onForgotPassword={handleForgotPassword}
-        />
-       </form>
-         
+        <MensaheButtons onSignIn={handleLogIn} onRegister={handleSignup} />
+      </form>
     </div>
   );
 }
-
-export default MensaheLogIn
